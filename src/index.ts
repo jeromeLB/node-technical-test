@@ -1,19 +1,19 @@
 import Fastify from "fastify";
-import mediaRoutes from './medias/routes';
+import mediaRoutes from "./medias/routes";
 
 const fastify = Fastify({
-  logger: true
+    logger: true,
 });
 
-fastify.register(mediaRoutes, { prefix: '/medias' });
+fastify.register(mediaRoutes, { prefix: "/medias" });
 
 const start = async () => {
-  try {
-    await fastify.listen({ port: 8080 });
-  } catch (error) {
-    console.error(error);
-    fastify.log.error(error);
-  }
-}
+    try {
+        await fastify.listen({ port: 8080 });
+    } catch (error) {
+        console.error(error);
+        fastify.log.error(error);
+    }
+};
 
 start();
