@@ -9,6 +9,7 @@
     "start": "tsc-watch --onSuccess \"node ./dist/index.js\"",
     "check": "yarn run eslint && yarn run test",
     "eslint": "eslint ./src",
+    "eslintfix": "eslint --fix ./src",
     "test": "nyc mocha src"
   },
   "dependencies": {
