@@ -1,6 +1,6 @@
-import { FastifyInstance, RouteShorthandOptions } from 'fastify';
+import { FastifyInstance, RouteShorthandOptions } from "fastify";
 
-export default function (fastify: FastifyInstance, options: any, done: () => void) {
+export default function (fastify: FastifyInstance, options: RouteShorthandOptions, done: () => void) {
 
     // List des medias
     fastify.get("/", async (req, res) => {
@@ -21,13 +21,13 @@ export default function (fastify: FastifyInstance, options: any, done: () => voi
     // Mise a jour d'un media
     fastify.put("/:id", async (req, res) => {
         const params = req.params as {id: string};
-        res.send({ message: "put /medias/" });
+        res.send({ message: "put /medias/" + params.id});
     });
-    
+
     // Suppression d'un media
     fastify.delete("/:id", async (req, res) => {
         const params = req.params as {id: string};
-        res.send({ message: "delete /medias/" });
+        res.send({ message: "delete /medias/" + params.id});
     });
 
     done();
