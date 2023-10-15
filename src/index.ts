@@ -1,11 +1,13 @@
 import Fastify from "fastify";
 import mediaRoutes from "./medias/routes";
 import database from "./db";
+import fastifyFormbody from "@fastify/formbody";
 
 const fastify = Fastify({
     logger: true,
 });
 
+fastify.register(fastifyFormbody);
 fastify.register(mediaRoutes, { prefix: "/medias" });
 
 try {

@@ -1,21 +1,23 @@
 import { FastifyInstance, RouteShorthandOptions } from "fastify";
+import { getMedias, postMedia } from "./medias_requests";
 
 export default function (fastify: FastifyInstance, options: RouteShorthandOptions, done: () => void) {
 
     // List des medias
     fastify.get("/", async (req, res) => {
-        res.send({ message: "get /medias" });
+        res.send(await getMedias());
     });
 
     // Creation d'un media
     fastify.post("/", async (req, res) => {
-        res.send({ message: "post /medias" });
+        const params = req.body as {name: string, duration: number, description: string};
+        res.send(postMedia(params.name, params.duration, params.description));
     });
 
     // Lecture d'un media
     fastify.get("/:id", async (req, res) => {
         const params = req.params as {id: string};
-        res.send({ message: "get /medias/" + params.id});
+        res.send(await getMedias(params.id));
     });
 
     // Mise a jour d'un media
