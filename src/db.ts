@@ -47,4 +47,22 @@ database.raw("DESCRIBE medias")
         }
     });
 
+database.raw("DESCRIBE programs")
+    .catch((error) => {
+        if(error.code === "ER_NO_SUCH_TABLE") {
+            database.schema.createTable("programs", (table) => {
+                table.increments();
+                table.string("name");
+                table.string("cover");
+                table.string("description");
+            })
+                .then(() => {
+                    fastify.log.info("Database 'programs' created");
+                })
+                .catch((error) => {
+                    fastify.log.error("Database 'programs' not created: ", error);
+                });
+        }
+    });
+
 export default database;

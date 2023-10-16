@@ -1,6 +1,7 @@
 import Fastify from "fastify";
 import routes from "./routes";
 import mediaRoutes from "./medias/routes";
+import programRoutes from "./programs/routes";
 import database from "./db";
 import fastifyFormbody from "@fastify/formbody";
 
@@ -11,6 +12,7 @@ const fastify = Fastify({
 fastify.register(fastifyFormbody);
 fastify.register(routes, { prefix: "/" });
 fastify.register(mediaRoutes, { prefix: "/medias" });
+fastify.register(programRoutes, { prefix: "/programs" });
 
 try {
     database.raw("select 1+1 as result;")

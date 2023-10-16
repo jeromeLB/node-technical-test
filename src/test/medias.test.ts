@@ -5,7 +5,7 @@ const assert = chai.assert;
 
 const host = "http://localhost:8080";
 
-describe("API test", () => {
+describe("API media test", () => {
 
     before (async () => {
         await axios.get(host+"/empty/medias");
