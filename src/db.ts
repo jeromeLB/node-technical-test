@@ -1,4 +1,9 @@
 import knex from "knex";
+import Fastify from "fastify";
+
+const fastify = Fastify({
+    logger: true,
+});
 
 const database = knex({
     client: "mysql2",
@@ -12,13 +17,13 @@ const database = knex({
     // debug: true,
     log: {
         warn(message) {
-            console.warn("Database warning: " + message);
+            fastify.log.warn("Database warning: " + message);
         },
         error(message) {
-            console.error("Database error: " + message);
+            fastify.log.error("Database error: " + message);
         },
         debug(message) {
-            console.debug("Database debug: " + message);
+            fastify.log.debug("Database debug: " + message);
         },
     },
 });
@@ -31,12 +36,13 @@ database.raw("DESCRIBE medias")
                 table.string("name");
                 table.integer("duration");
                 table.string("description");
+                table.string("file");
             })
                 .then(() => {
-                    console.log("Database 'medias' created");
+                    fastify.log.info("Database 'medias' created");
                 })
                 .catch((error) => {
-                    console.log("Database 'medias' not created: ", error);
+                    fastify.log.error("Database 'medias' not created: ", error);
                 });
         }
     });
