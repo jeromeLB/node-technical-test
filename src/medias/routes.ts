@@ -11,7 +11,20 @@ export default function (fastify: FastifyInstance, options: RouteShorthandOption
     // Creation d'un media
     fastify.post("/", async (req, res) => {
         const params = req.body as {name: string, duration: number, description: string};
-        res.send(postMedia(params.name, params.duration, params.description));
+        const response: object = await postMedia(params.name, params.duration, params.description)
+            .then(() => {
+                return {
+                    message: "Data recorded successfully",
+                };
+            })
+            .catch((error) => {
+                return {
+                    error: 2,
+                    message: "Error when inserting data: " + error,
+                };
+            });
+
+        res.send(response);
     });
 
     // Lecture d'un media
