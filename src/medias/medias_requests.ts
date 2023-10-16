@@ -17,10 +17,7 @@ async function getMedias(id?: number):Promise<object> {
 
 async function postMedia(name: string, duration: number, description: string, file: string): Promise<object> {
     if (!name || !duration || !description || !file) {
-        return {
-            error: 1,
-            message: "Fields must not be empty",
-        };
+        return new MediaError(1, "Fields must not be empty");
     } else {
         return await database.table("medias").insert({
             name: name,
@@ -68,17 +65,11 @@ async function deleteMedia(id: number) {
                     id: id,
                 };
             } else {
-                return {
-                    error: 4,
-                    message: "Media not found",
-                };
+                return new MediaError(4, "Media not found");
             }
         })
         .catch((error) => {
-            return {
-                error: 3,
-                message: "Media cannot be deleted: " + error,
-            };
+            return new MediaError(3, "Media cannot be deleted: " + error);
         });
 }
 

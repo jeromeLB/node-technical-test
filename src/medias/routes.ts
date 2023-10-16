@@ -49,10 +49,7 @@ export default function (fastify: FastifyInstance, options: RouteShorthandOption
                     }
                 })
                 .catch((error) => {
-                    return {
-                        error: 6,
-                        message: "Error when updating data: " + error,
-                    };
+                    return new MediaError(6, "Error when updating data: " + error);
                 });
 
             res.send(response);
