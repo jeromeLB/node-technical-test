@@ -1,9 +1,9 @@
-export interface IMediaError {
+export interface IAPIError {
     error: number,
     message: string;
 }
 
-export class MediaError implements IMediaError {
+export class APIError implements IAPIError {
     error: number;
     message: string;
 

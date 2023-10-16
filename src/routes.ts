@@ -1,6 +1,5 @@
 import { FastifyInstance, RouteShorthandOptions } from "fastify";
 import { dropDB, emptyDB } from "./db_requests";
-// import { MediaError } from "./medias/Medias_Errors";
 
 export default function (fastify: FastifyInstance, options: RouteShorthandOptions, done: () => void) {
 

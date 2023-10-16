@@ -1,5 +1,5 @@
 import database from "./db";
-import { MediaError} from "./medias/Medias_Errors";
+import { APIError} from "./APIErrors";
 
 async function dropDB(table: string) {
     return await database.schema.dropTable(table)
@@ -9,7 +9,7 @@ async function dropDB(table: string) {
             };
         })
         .catch((error) => {
-            return new MediaError(8, "Cannot drop table: " + error);
+            return new APIError(8, "Cannot drop table: " + error);
         });
 }
 
@@ -21,7 +21,7 @@ async function emptyDB(table: string) {
             };
         })
         .catch((error) => {
-            return new MediaError(8, "Cannot truncate table: " + error);
+            return new APIError(8, "Cannot truncate table: " + error);
         });
 }
 

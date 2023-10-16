@@ -1,6 +1,6 @@
 import { FastifyInstance, RouteShorthandOptions } from "fastify";
 import { getMedias, postMedia, putMedia, deleteMedia } from "./medias_requests";
-import { MediaError } from "./Medias_Errors";
+import { APIError } from "../APIErrors";
 
 export default function (fastify: FastifyInstance, options: RouteShorthandOptions, done: () => void) {
 
@@ -20,7 +20,7 @@ export default function (fastify: FastifyInstance, options: RouteShorthandOption
                 };
             })
             .catch((error) => {
-                return new MediaError(2, "Error: " + error);
+                return new APIError(2, "Error: " + error);
             });
 
         res.send(response);
@@ -45,16 +45,16 @@ export default function (fastify: FastifyInstance, options: RouteShorthandOption
                             message: "Media updated",
                         };
                     } else {
-                        return new MediaError(7, "Media is not updated");
+                        return new APIError(7, "Media is not updated");
                     }
                 })
                 .catch((error) => {
-                    return new MediaError(6, "Error when updating data: " + error);
+                    return new APIError(6, "Error when updating data: " + error);
                 });
 
             res.send(response);
         } else {
-            res.send(new MediaError(5, "Nothing to update"));
+            res.send(new APIError(5, "Nothing to update"));
         }
     });
 

@@ -1,6 +1,6 @@
 import database from "../db";
 import { Media } from "./Medias";
-import { MediaError} from "./Medias_Errors";
+import { APIError} from "../APIErrors";
 
 async function getMedias(id?: number):Promise<object> {
     const getMediasRequest = database.table("medias");
@@ -17,7 +17,7 @@ async function getMedias(id?: number):Promise<object> {
 
 async function postMedia(name: string, duration: number, description: string, file: string): Promise<object> {
     if (!name || !duration || !description || !file) {
-        return new MediaError(1, "Fields must not be empty");
+        return new APIError(1, "Fields must not be empty");
     } else {
         return await database.table("medias").insert({
             name: name,
@@ -50,7 +50,7 @@ async function putMedia(id: number, name: string, duration: number, description:
             return response;
         })
         .catch((error) => {
-            return new MediaError(6, "Cannot update media: " + error);
+            return new APIError(6, "Cannot update media: " + error);
         });
 }
 
@@ -65,11 +65,11 @@ async function deleteMedia(id: number) {
                     id: id,
                 };
             } else {
-                return new MediaError(4, "Media not found");
+                return new APIError(4, "Media not found");
             }
         })
         .catch((error) => {
-            return new MediaError(3, "Media cannot be deleted: " + error);
+            return new APIError(3, "Media cannot be deleted: " + error);
         });
 }
 
