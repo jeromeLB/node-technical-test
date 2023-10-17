@@ -37,7 +37,7 @@ describe("API media test", () => {
 
 
     it("Read first media", async () => {
-        const responseData = {"data":[{"id": 1, "name": "My Name", "duration": 10, "file": "My File", "description": "My Description"}]};
+        const responseData = {"data":[{"id": 1, "name": "My Name", "duration": 10, "file": "My File", "description": "My Description", "idProgram": null}]};
 
         const response = await axios.get(host+"/medias/1");
         assert.equal(response.status, 200);
@@ -60,7 +60,7 @@ describe("API media test", () => {
     });
 
     it("Get all medias", async() => {
-        const responseData = {"data":[{"id": 1, "name": "My Name", duration: 10, file: "My File", "description": "My Description"}, {"id": 2, "name": "My Name 2", duration: 20, file: "My File 2", "description": "My Description 2"}]};
+        const responseData = {"data":[{"id": 1, "name": "My Name", duration: 10, file: "My File", "description": "My Description", "idProgram": null}, {"id": 2, "name": "My Name 2", duration: 20, file: "My File 2", "description": "My Description 2", "idProgram": null}]};
 
         const response = await axios.get(host + "/medias");
         assert.equal(response.status, 200);

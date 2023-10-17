@@ -37,6 +37,7 @@ database.raw("DESCRIBE medias")
                 table.integer("duration");
                 table.string("description");
                 table.string("file");
+                table.integer("idProgram");
             })
                 .then(() => {
                     fastify.log.info("Database 'medias' created");

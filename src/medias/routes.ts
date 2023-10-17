@@ -36,7 +36,6 @@ export default function (fastify: FastifyInstance, options: RouteShorthandOption
     fastify.put("/:id", async (req, res) => {
         const params = req.params as {id: number};
         const paramsBody = req.body as {id: number, name: string, duration: number, description: string, file: string};
-        console.log("** paramsbody", paramsBody);
         if (paramsBody) {
             const response = await putMedia(params.id, paramsBody.name, paramsBody.duration, paramsBody.description, paramsBody.file)
                 .then((result) => {

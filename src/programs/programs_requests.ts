@@ -14,7 +14,7 @@ async function getPrograms(id?: number):Promise<object> {
     };
 }
 
-async function postProgram(name: string, cover: string, description: string) {
+async function postProgram(name: string, cover: string, description: string): Promise<object> {
     if (!name || !cover || !description) {
         return new APIError(1, "Fields must not be empty");
     } else {

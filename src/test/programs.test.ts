@@ -81,4 +81,19 @@ describe("API programs test", () => {
         assert.deepEqual(response.data, responseData);
     });
 
+    it("Add a media to a program", async() => {
+        const responseData = {"message":"Media updated"};
+
+        const response = await axios.get(host+ "/programs/2/add/1");
+        assert.equal(response.status, 200);
+        assert.deepEqual(response.data, responseData);
+    });
+
+    it("Add the same media to a program twice", async() => {
+        const responseData = {"error": 15, "message": "Media is still in a program"};
+
+        const response = await axios.get(host+ "/programs/2/add/1");
+        assert.equal(response.status, 200);
+        assert.deepEqual(response.data, responseData);
+    });
 });

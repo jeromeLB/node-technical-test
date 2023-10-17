@@ -1,5 +1,6 @@
 import { FastifyInstance, RouteShorthandOptions } from "fastify";
 import { getPrograms, postProgram, deleteProgram } from "./programs_requests";
+import { addMediaToProgram, delMediaToProgram } from "./actions_requests";
 import { APIError } from "../APIErrors";
 
 export default function (fastify: FastifyInstance, options: RouteShorthandOptions, done: () => void) {
@@ -35,6 +36,16 @@ export default function (fastify: FastifyInstance, options: RouteShorthandOption
     fastify.get("/:id", async (req, res) => {
         const params = req.params as {id: number};
         res.send(await getPrograms(params.id));
+    });
+
+    fastify.get("/:idProgram/add/:idMedia", async (req, res) => {
+        const params = req.params as {idProgram: number, idMedia: number};
+        res.send(await addMediaToProgram(params.idProgram, params.idMedia));
+    });
+
+    fastify.get("/:idProgram/del/:idMedia", async (req, res) => {
+        const params = req.params as {idProgram: number, idMedia: number};
+        res.send(await delMediaToProgram(params.idProgram, params.idMedia));
     });
 
     done();
